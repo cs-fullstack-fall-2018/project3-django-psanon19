@@ -19,6 +19,19 @@ class UserForm(forms.ModelForm):
         }
 
 
-class TransactionForm(forms.Form):
-    deposits = forms.DecimalField(default=0,max_digits=25, decimal_places=2)
-    withdraws = forms.DecimalField(default=0,max_digits=25, decimal_places=2)
+class DepositForm(forms.ModelForm):
+    class Meta:
+        model = TransactionModel
+        fields = ['deposits']
+
+
+class WithdrawForm(forms.ModelForm):
+    class Meta:
+        model = TransactionModel
+        fields = ['withdraws']
+
+
+class TransactionForm(forms.ModelForm):
+    class Meta:
+        model = TransactionModel
+        fields = ['deposits','withdraws']

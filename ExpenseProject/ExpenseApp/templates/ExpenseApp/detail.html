@@ -15,8 +15,14 @@
     <h1>Username: {{ post.first_name }}</h1>
     <p>Current Balance: {{ post.current_balance|linebreaksbr }}</p>
     <p>Current Expenses:<br/>{{post.expenses}}</p>
+    {% for eachTransactions in transactions %}
+        <p>Deposits: {{ eachTransactions.deposits }}</p>
+    {% endfor %}
 </div>
+
 {% endblock %}
+
+
 
 {% block navi %}
 <div>

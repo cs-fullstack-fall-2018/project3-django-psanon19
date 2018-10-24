@@ -10,7 +10,7 @@ urlpatterns = [
     path('user/',views.index, name='index'),
     path('createUser/', views.createUser, name='createUser'),
     path('admin/', admin.site.urls),
-    path('deposit/<int:pk>/', views.deposit, name='deposit')
+    path('deposit/<int:pk>/', views.deposit, name='deposit'),
 ]
 
 
