@@ -1,0 +1,23 @@
+{% extends "ExpenseApp/base.html" %}
+
+{% block maininfo%}
+<h4>Add a User</h4>
+<form method="POST" class="post-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
+
+{% block navi %}
+
+<p>Blog App</p>
+{% if user.is_authenticated %}
+User: {{ user.get_username }}
+{% else %}
+Not Logged IN
+{% endif %}
+<div class="logout" align="right">
+    <a href="{% url 'logout' %}" class="btn btn-link">Logout</a>
+</div>
+{% endblock %}

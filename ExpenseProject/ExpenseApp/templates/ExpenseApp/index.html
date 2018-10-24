@@ -1,0 +1,44 @@
+{% extends "ExpenseApp/base.html" %}
+
+
+
+
+{% block navi %}
+<div>
+    <h1><a href="{% url 'userindex' %}" class="btn-link">Blog App</a></h1>
+    {% if user.is_authenticated %}
+    User: {{ user.get_username }}
+    {% else %}
+    Not Logged IN
+    {% endif %}
+    <div class="logout" align="right">
+        <a href="{% url 'logout' %}" class="btn btn-link">Logout</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block maininfo %}
+    {% if form_list %}
+
+    <ul>
+        {% for eachItem in form_list %}
+        <li><a href="{% url 'detail' pk=eachItem.pk %}" class="btn btn-primary">{{ eachItem.first_name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <h1 align="center">Hey buddy, you should Log In!</h1>
+    {% endif %}
+{% endblock %}
+
+{% block footer %}
+<div align="center">
+    <footer>
+        <h5>
+        <a href="{% url 'index' %}" class="btn btn-link">List All</a>
+        <a href="{% url 'userindex' %}" class="btn btn-link">List Mine</a>
+        <a href="{% url 'admin:index' %}" class="btn btn-link" target="_blank">Admin</a>
+        </h5>
+
+    </footer>
+</div>
+{% endblock %}

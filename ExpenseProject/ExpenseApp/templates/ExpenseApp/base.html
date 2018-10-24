@@ -1,0 +1,33 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Expense App</title>
+    <link rel="stylesheet" href="{% static 'ExpenseApp/bootstrap/bootstrap.css' %}">
+    <script src="{% static 'ExpenseApp/bootstrap/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'ExpenseApp/bootstrap/bootstrap.js' %}"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="jumbotron">
+        {% block navi %}
+        {% endblock %}
+    </div>
+
+
+    <div style="border: black thin solid">
+        {% block maininfo %}
+        {% endblock %}
+    </div>
+
+    <div style="border: black thin solid">
+        {% block footer %}
+        {% endblock %}
+    </div>
+</div>
+
+
+
+</body>
+</html>
