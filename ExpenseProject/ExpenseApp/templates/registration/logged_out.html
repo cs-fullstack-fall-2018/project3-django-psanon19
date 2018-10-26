@@ -3,12 +3,7 @@
 
 {% block navi %}
 
-<p>Blog App</p>
-        {% if user.is_authenticated %}
-        User: {{ user.get_username }}
-        {% else %}
-        Not Logged IN
-        {% endif %}
+<p>Expense App</p>
         <div class="logout" align="right">
             <a href="{% url 'login' %}" class="btn btn-link">Login</a>
             <a href="{% url 'createUser' %}" class="btn btn-link">Create User</a>
@@ -24,6 +19,6 @@
         {% endfor %}
     </ul>
     {% else %}
-    <h1 align="center">Hey buddy, you should Log In!</h1>
+    <h1 align="center">Nothing Here</h1>
     {% endif %}
 {% endblock %}

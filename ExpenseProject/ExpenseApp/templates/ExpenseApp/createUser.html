@@ -11,12 +11,6 @@
 
 {% block navi %}
 
-<p>Blog App</p>
-{% if user.is_authenticated %}
-User: {{ user.get_username }}
-{% else %}
-Not Logged IN
-{% endif %}
 <div class="logout" align="right">
     <a href="{% url 'logout' %}" class="btn btn-link">Logout</a>
 </div>

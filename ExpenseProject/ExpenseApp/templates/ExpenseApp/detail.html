@@ -15,25 +15,29 @@
     <a class="btn btn-primary btn-lg btn-block" href="{% url 'withdraw' pk=post.pk %}">Withdraw</a>
     </b></div>
     <h1>Username: {{ post.first_name }}</h1>
-    <p>Current Balance: {{ post.current_balance|linebreaksbr }}</p>
-    <div class="deposits">
-    Deposits:
-        <hr/>
+    <p>Current Balance: {{ post.current_balance|floatformat:2 }}</p>
+    <div class="row">
+    <div class="column">
+    <h2>Deposits:</h2>
+
     {% for eachTransactions in transactions %}
         {% if eachTransactions.deposits != 0 %}
-        <p>{{ eachTransactions.deposits }} on the {{eachTransactions.date_Submittd}}</p>
+        <p>$ {{ eachTransactions.deposits|floatformat:2 }} on the {{eachTransactions.date_Submittd}}</p>
+        <hr/>
         {% endif %}
     {% endfor %}
     </div>
     <br/>
-    <div class="withdraws">
-    Withdraws:
-        <hr/>
+    <div class="column">
+    <h2>Withdraws:</h2>
+
     {% for eachTransactions in transactions %}
         {% if eachTransactions.withdraws != 0 %}
-        <p>{{ eachTransactions.withdraws }} on the {{eachTransactions.date_Submittd}}</p>
+        <p>$ {{ eachTransactions.withdraws|floatformat:2 }} on the {{eachTransactions.date_Submittd}}</p>
+        <hr/>
         {% endif %}
     {% endfor %}
+    </div>
     </div>
 </div>
 
@@ -43,7 +47,7 @@
 
 {% block navi %}
 <div>
-    <h1><a href="{% url 'userindex' %}" class="btn-link">Blog App</a></h1>
+    <h1><a href="{% url 'userindex' %}" class="btn-link">Expense App</a></h1>
 {% if user.is_authenticated %}
 User: {{ user.get_username }}
 {% else %}

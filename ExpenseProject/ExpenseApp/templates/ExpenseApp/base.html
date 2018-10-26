@@ -3,16 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Expense App</title>
+    <link rel="stylesheet" href="{% static 'ExpenseApp/css/ExpenseApp.css' %}">
     <link rel="stylesheet" href="{% static 'ExpenseApp/bootstrap/bootstrap.css' %}">
     <script src="{% static 'ExpenseApp/bootstrap/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'ExpenseApp/bootstrap/bootstrap.js' %}"></script>
+
+
 </head>
 <body>
+<div class="navbar">
+    <ul>
+        <li><a class="active" href="{% url 'userindex' %}">Home</a></li>
+        <li><a href="#news">Edit Account</a></li>
+        <li><a href="#contact">Contact</a></li>
+
+        <li>{% block navi %}
+            {% endblock %}</li>
+    </ul>
+    <div class="userSignCheck">
+    {% if user.is_authenticated %}
+    User: {{ user.get_username }}
+    {% else %}
+    Not Logged IN
+    {% endif %}
+    </div>
+</div>
 
 <div class="container">
     <div class="jumbotron">
-        {% block navi %}
-        {% endblock %}
+        <h1>Expense App</h1>
     </div>
 
 
