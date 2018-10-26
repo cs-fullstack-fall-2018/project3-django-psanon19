@@ -13,3 +13,29 @@
     </div>
 </div>
 {% endblock %}
+
+
+{% block maininfo %}
+
+
+<form method="POST">
+    {% csrf_token %}
+    <label for="trans_value_id">How Much to Withdraw?</label>
+    <input type="number" name="trans_value" id = "trans_value_id" step="0.000000000000000001"/>
+    <button type="submit">Save</button>
+</form>
+
+{% endblock %}
+
+
+{% block footer %}
+<div align="center">
+    <footer>
+        <h5>
+            <a href="{% url 'index' %}" class="btn btn-link">List All</a>
+            <a href="{% url 'userindex' %}" class="btn btn-link">List Mine</a>
+            <a href="{% url 'admin:index' %}" class="btn btn-link" target="_blank">Admin</a>
+        </h5>
+    </footer>
+</div>
+{% endblock %}

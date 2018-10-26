@@ -11,13 +11,30 @@
     <a class="btn btn-primary btn-lg btn-block" href="{% url 'edit' pk=post.pk %}">Edit Info</a>
         <br/>
     <a class="btn btn-primary btn-lg btn-block" href="{% url 'deposit' pk=post.pk %}">Deposit</a>
+        <br/>
+    <a class="btn btn-primary btn-lg btn-block" href="{% url 'withdraw' pk=post.pk %}">Withdraw</a>
     </b></div>
     <h1>Username: {{ post.first_name }}</h1>
     <p>Current Balance: {{ post.current_balance|linebreaksbr }}</p>
-    <p>Current Expenses:<br/>{{post.expenses}}</p>
+    <div class="deposits">
+    Deposits:
+        <hr/>
     {% for eachTransactions in transactions %}
-        <p>Deposits: {{ eachTransactions.deposits }}</p>
+        {% if eachTransactions.deposits != 0 %}
+        <p>{{ eachTransactions.deposits }} on the {{eachTransactions.date_Submittd}}</p>
+        {% endif %}
     {% endfor %}
+    </div>
+    <br/>
+    <div class="withdraws">
+    Withdraws:
+        <hr/>
+    {% for eachTransactions in transactions %}
+        {% if eachTransactions.withdraws != 0 %}
+        <p>{{ eachTransactions.withdraws }} on the {{eachTransactions.date_Submittd}}</p>
+        {% endif %}
+    {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

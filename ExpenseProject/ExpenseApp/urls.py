@@ -11,6 +11,7 @@ urlpatterns = [
     path('createUser/', views.createUser, name='createUser'),
     path('admin/', admin.site.urls),
     path('deposit/<int:pk>/', views.deposit, name='deposit'),
+    path('withdraw/<int:pk>/', views.withdraw, name='withdraw'),
 ]
 
 

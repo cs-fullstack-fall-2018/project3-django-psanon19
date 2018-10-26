@@ -9,7 +9,7 @@ class ExpenseModel(models.Model):
     last_name = models.CharField(max_length=50, null=True)
     expenses = models.TextField(max_length=1000)
     date_Submitted = models.DateTimeField(default=datetime.now)
-    current_balance = models.DecimalField(default=0,max_digits=25, decimal_places=2)
+    current_balance = models.FloatField(default=0,)
     emergency_fund = models.DecimalField(default=0,max_digits=25, decimal_places=2)
     username = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,)
 
@@ -33,8 +33,8 @@ class UserSetup(models.Model):
 
 
 class TransactionModel(models.Model):
-    deposits = models.DecimalField(default=0,max_digits=25, decimal_places=2)
-    withdraws = models.DecimalField(default=0,max_digits=25, decimal_places=2)
+    deposits = models.FloatField(default=0, null=True, blank=True,)
+    withdraws = models.FloatField(default=0, null=True, blank=True,)
     date_Submittd = models.DateTimeField(default=datetime.now)
     expenseFK = models.ForeignKey(ExpenseModel, on_delete=models.SET_NULL, null=True, blank=True,)
 
