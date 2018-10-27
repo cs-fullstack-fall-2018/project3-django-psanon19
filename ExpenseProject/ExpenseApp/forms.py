@@ -5,7 +5,7 @@ from .models import ExpenseModel, UserSetup, TransactionModel
 class ExpenseForm(forms.ModelForm):
     class Meta:
         model = ExpenseModel
-        fields = ['first_name','last_name', 'current_balance', 'emergency_fund', 'expenses', 'username' ]
+        fields = ['first_name','last_name', 'current_balance', 'emergency_fund', ]
 
         # order_field = {'first_name','last_name', 'deposits', 'withdraws', 'current_balance', 'emergency_fund', 'expenses'}
 

@@ -1,11 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import ExpenseModel, TransactionModel
+from .models import ExpenseModel, TransactionModel, UserSetup
 from .forms import ExpenseForm, UserForm, DepositForm, WithdrawForm
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def index(request):
     form_list = ExpenseModel.objects.all()
     context = {'form_list': form_list}
@@ -16,7 +16,6 @@ def index(request):
 def userindex(request):
     form_list = ExpenseModel.objects.filter(username=request.user)
     # post = get_object_or_404(TransactionModel, pk=pk)
-    print(form_list)
     context = {'form_list': form_list, }
     return render(request, 'ExpenseApp/index.html', context)
 
@@ -27,19 +26,20 @@ def createUser(request):
         if form.is_valid():
             User.objects.create_user(request.POST.get("first_name"), request.POST.get("email"),
                                      request.POST.get("password"), )
+            form.save()
             return redirect('index')
     else:
         form = UserForm()
         return render(request, 'ExpenseApp/createUser.html', {'form': form})
 
-
+@login_required
 def post_detail(request, pk):
     post = get_object_or_404(ExpenseModel, pk=pk)
     transactions = (post.transactionmodel_set.all())
     context = {'post': post, 'transactions': transactions}
     return render(request, 'ExpenseApp/detail.html', context)
 
-
+@login_required
 def edit(request, pk):
     the_model = get_object_or_404(ExpenseModel, pk=pk)
     form = ExpenseForm(request.POST, instance=the_model)
@@ -51,7 +51,7 @@ def edit(request, pk):
         form = ExpenseForm(instance=the_model)
     return render(request, 'ExpenseApp/input.html', {'form': form})
 
-
+@login_required
 def deposit(request, pk):
     the_model = get_object_or_404(ExpenseModel, pk=pk)
     print("first cookie")
@@ -75,7 +75,7 @@ def deposit(request, pk):
         print('THE WARP cookie')
     return render(request, 'ExpenseApp/deposit.html')
 
-
+@login_required
 def withdraw(request, pk):
     the_model = get_object_or_404(ExpenseModel, pk=pk)
     print("first cookie")
@@ -98,3 +98,26 @@ def withdraw(request, pk):
     else:
         print('THE WARP cookie')
     return render(request, 'ExpenseApp/withdraw.html')
+
+
+def edit_Account(request, pk):
+    the_model = get_object_or_404(UserSetup, pk=pk)
+    form = UserForm(request.POST, instance=the_model)
+    if form.is_valid():
+        form.save()
+        return redirect("userindex")
+    else:
+        the_model = get_object_or_404(UserSetup, pk=pk)
+        form = UserForm(instance=the_model)
+    return render(request, 'ExpenseApp/input.html', {'form': form})
+
+
+def post_new(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('userindex')
+    else:
+        form = ExpenseForm()
+    return render(request,'ExpenseApp/input.html', {'form': form})

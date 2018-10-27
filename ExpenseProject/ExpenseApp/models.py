@@ -7,7 +7,6 @@ from django.utils import timezone
 class ExpenseModel(models.Model):
     first_name = models.CharField(max_length=50, null=True)
     last_name = models.CharField(max_length=50, null=True)
-    expenses = models.TextField(max_length=1000)
     date_Submitted = models.DateTimeField(default=datetime.now)
     current_balance = models.FloatField(default=0,)
     emergency_fund = models.DecimalField(default=0,max_digits=25, decimal_places=2)
