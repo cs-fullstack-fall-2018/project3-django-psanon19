@@ -4,19 +4,23 @@
 
 
 {% block navi %}
-<div>
-    <div class="logout" align="right">
+
+    <li class="logout" align="right">
         <a href="{% url 'logout' %}" class="btn btn-link">Logout</a>
-    </div>
-</div>
+    </li>
+
 {% endblock %}
 
 {% block maininfo %}
     {% if form_list %}
 
+<div align="center">
+<img src="../../static/ExpenseApp/images/familyAcc.png" height="31" width="320">
+<hr/>
+</div>
     <ul>
         {% for eachItem in form_list %}
-        <li><a href="{% url 'detail' pk=eachItem.pk %}" class="btn btn-primary">{{ eachItem.first_name }}</a></li>
+        <li><a href="{% url 'detail' pk=eachItem.pk %}" class="btn btn-link">{{ eachItem.first_name }}</a></li>
         {% endfor %}
     </ul>
     {% else %}

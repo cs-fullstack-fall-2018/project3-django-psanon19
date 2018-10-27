@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Expense App</title>
+    <title>Boon Financial Services</title>
+    <link href="https://fonts.googleapis.com/css?family=Spicy+Rice" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'ExpenseApp/css/ExpenseApp.css' %}">
     <link rel="stylesheet" href="{% static 'ExpenseApp/bootstrap/bootstrap.css' %}">
     <script src="{% static 'ExpenseApp/bootstrap/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'ExpenseApp/bootstrap/bootstrap.js' %}"></script>
 
-
+    <style>
+        body {
+            background-color: lightgray;
+            font-family: 'Spicy Rice', cursive;
+        }
+    </style>
 </head>
 <body>
 <div class="navbar">
@@ -16,31 +22,32 @@
         <li><a class="active" href="{% url 'userindex' %}">Home</a></li>
         <li><a href="#news">Edit Account</a></li>
         <li><a href="#contact">Contact</a></li>
-
-        <li>{% block navi %}
-            {% endblock %}</li>
+        {% block navi %}
+        {% endblock %}
     </ul>
     <div class="userSignCheck">
     {% if user.is_authenticated %}
-    User: {{ user.get_username }}
+        <h1>User: {{ user.get_username }}</h1>
     {% else %}
-    Not Logged IN
+    <h1>Not Logged IN
     {% endif %}
     </div>
 </div>
 
 <div class="container">
-    <div class="jumbotron">
-        <h1>Expense App</h1>
+    <div class="jumbotron" align="center">
+        <!--<h1>Boon Financial Services</h1>-->
+        <!--<img src="{% static 'ExpenseApp/images/logo.png'" name="logo">-->
+        <img src="../../static/ExpenseApp/images/logo.png" height="71" width="760"/>
     </div>
 
 
-    <div style="border: black thin solid">
+    <div class="mainInfo" style="border: black thin solid">
         {% block maininfo %}
         {% endblock %}
     </div>
 
-    <div style="border: black thin solid">
+    <div class="footer" style="border: black thin solid">
         {% block footer %}
         {% endblock %}
     </div>

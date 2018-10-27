@@ -9,9 +9,9 @@
 </form>
 {% endblock %}
 
-{% block navi %}
 
-<div class="logout" align="right">
-    <a href="{% url 'logout' %}" class="btn btn-link">Logout</a>
-</div>
+{% block navi %}
+<li class="logout" align="right">
+    <a href="{% url 'login' %}" class="btn btn-link">Login</a>
+</li>
 {% endblock %}

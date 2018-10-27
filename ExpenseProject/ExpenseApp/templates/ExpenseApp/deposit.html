@@ -1,11 +1,11 @@
 {% extends "ExpenseApp/base.html" %}
 
 {% block navi %}
-<div>
-    <div class="logout" align="right">
+
+    <li class="logout" align="right">
         <a href="{% url 'logout' %}" class="btn btn-link">Logout</a>
-    </div>
-</div>
+    </li>
+
 {% endblock %}
 
 
@@ -13,7 +13,7 @@
 
 
 <form method="POST">
-    <p>How Much Would You Like To Deposit?</p>
+
     {% csrf_token %}
     <label for="trans_value_id">How Much to Deposit?</label>
     <input type="number" name="trans_value" id = "trans_value_id" step="0.01"/>

@@ -1,3 +1,7 @@
+.jumbotron {
+    border: black thin solid;
+}
+
 .column {
     float: left;
     width: 50%;
@@ -57,6 +61,20 @@
     background-color: #111;
 }
 
+.mainInfo{
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+}
+
 .navbar .active {
     background-color: #4CAF50;
+}
+
+/* Footer */
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+    margin-top: 20px;
 }

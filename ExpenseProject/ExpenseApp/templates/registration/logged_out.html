@@ -3,11 +3,13 @@
 
 {% block navi %}
 
-<p>Expense App</p>
-        <div class="logout" align="right">
+
+        <li class="logout" align="right">
             <a href="{% url 'login' %}" class="btn btn-link">Login</a>
+        </li>
+        <li class="logout" align="right">
             <a href="{% url 'createUser' %}" class="btn btn-link">Create User</a>
-        </div>
+        </li>
 {% endblock %}
 
 {% block maininfo %}

@@ -46,17 +46,11 @@
 
 
 {% block navi %}
-<div>
-    <h1><a href="{% url 'userindex' %}" class="btn-link">Expense App</a></h1>
-{% if user.is_authenticated %}
-User: {{ user.get_username }}
-{% else %}
-Not Logged IN
-{% endif %}
-<div class="logout" align="right">
+
+<li class="logout" align="right">
     <a href="{% url 'logout' %}" class="btn btn-link">Logout</a>
-</div>
-</div>
+</li>
+
 {% endblock %}
 
 
