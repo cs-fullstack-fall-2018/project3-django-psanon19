@@ -15,7 +15,16 @@
     <a class="btn btn-primary btn-lg btn-block" href="{% url 'withdraw' pk=post.pk %}">Withdraw</a>
     </b></div>
     <h1>Username: {{ post.first_name }}</h1>
-    <p>Current Balance: {{ post.current_balance|floatformat:2 }}</p>
+    <div class="row">
+        <div class="column">
+            <p><h3>Checking Balance: $ {{ post.current_balance|floatformat:2 }}</h3></p>
+        </div>
+
+        <div class="column">
+            <p><h3>Savings Balance: $ {{ post.emergency_fund|floatformat:2 }}</h3></p>
+        </div>
+    </div>
+    <br/>
     <div class="row">
     <div class="column">
     <h2>Deposits:</h2>
@@ -55,14 +64,30 @@
 
 
 {% block footer %}
+
+{% if user.is_authenticated %}
+{% if user.username == 'admin' %}
 <div align="center">
     <footer>
         <h5>
-            <a href="{% url 'index' %}" class="btn btn-link">List All</a>
-            <a href="{% url 'userindex' %}" class="btn btn-link">List Mine</a>
-            <a href="{% url 'admin:index' %}" class="btn btn-link" target="_blank">Admin</a>
+            <a href="{% url 'index' %}" class="btn btn-link">All Accounts</a>
+            <a href="{% url 'userindex' %}" class="btn btn-link">My Accounts</a>
+            <a href="{% url 'admin:index' %}" class="btn btn-link" target="_blank">Admin Site</a>
         </h5>
     </footer>
 </div>
+{% elif user.username == 'student' %}
+<div align="center">
+    <footer>
+        <h5>
+            <a href="{% url 'index' %}" class="btn btn-link">All Accounts</a>
+            <a href="{% url 'userindex' %}" class="btn btn-link">My Accounts</a>
+            <a href="{% url 'admin:index' %}" class="btn btn-link" target="_blank">Admin Site</a>
+        </h5>
+    </footer>
+</div>
+{% else %}
+<h5> || A NightxGamer Website || </h5>
+{% endif %}
+{% endif %}
 {% endblock %}
-

@@ -47,14 +47,30 @@
 
 
 {% block footer %}
+
+{% if user.is_authenticated %}
+{% if user.username == 'admin' %}
 <div align="center">
     <footer>
         <h5>
-            <a href="{% url 'index' %}" class="btn btn-link">List All</a>
-            <a href="{% url 'userindex' %}" class="btn btn-link">List Mine</a>
-            <a href="{% url 'admin:index' %}" class="btn btn-link" target="_blank">Admin</a>
+            <a href="{% url 'index' %}" class="btn btn-link">All Accounts</a>
+            <a href="{% url 'userindex' %}" class="btn btn-link">My Accounts</a>
+            <a href="{% url 'admin:index' %}" class="btn btn-link" target="_blank">Admin Site</a>
         </h5>
-
     </footer>
 </div>
+{% elif user.username == 'student' %}
+<div align="center">
+    <footer>
+        <h5>
+            <a href="{% url 'index' %}" class="btn btn-link">All Accounts</a>
+            <a href="{% url 'userindex' %}" class="btn btn-link">My Accounts</a>
+            <a href="{% url 'admin:index' %}" class="btn btn-link" target="_blank">Admin Site</a>
+        </h5>
+    </footer>
+</div>
+{% else %}
+<h5> || A NightxGamer Website || </h5>
+{% endif %}
+{% endif %}
 {% endblock %}

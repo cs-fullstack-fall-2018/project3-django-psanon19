@@ -20,7 +20,29 @@
 </div>
     <ul>
         {% for eachItem in form_list %}
-        <li><a href="{% url 'detail' pk=eachItem.pk %}" class="btn btn-link">{{ eachItem.first_name }}</a></li>
+        <li><a href="{% url 'detail' pk=eachItem.pk %}" class="btn btn-link">{{ eachItem.first_name }}</a>| <p>Current Balance: $ {{ eachItem.current_balance|floatformat:2 }}</p></li>
+        {% if user.is_authenticated %}
+        {% if user.username == 'admin' %}
+        <div style="color: red">
+
+                <h5>
+                    (Owned by {{ eachItem.username }})
+                </h5>
+
+        </div>
+        {% elif user.username == 'student' %}
+        <div style="color: red">
+
+                <h5>
+                    (Owned by {{ eachItem.username }})
+                </h5>
+
+        </div>
+        {% else %}
+
+        {% endif %}
+        {% endif %}
+
         {% endfor %}
     </ul>
     {% else %}
@@ -28,15 +50,32 @@
     {% endif %}
 {% endblock %}
 
+
 {% block footer %}
+
+{% if user.is_authenticated %}
+{% if user.username == 'admin' %}
 <div align="center">
     <footer>
         <h5>
-        <a href="{% url 'index' %}" class="btn btn-link">List All</a>
-        <a href="{% url 'userindex' %}" class="btn btn-link">List Mine</a>
-        <a href="{% url 'admin:index' %}" class="btn btn-link" target="_blank">Admin</a>
+            <a href="{% url 'index' %}" class="btn btn-link">All Accounts</a>
+            <a href="{% url 'userindex' %}" class="btn btn-link">My Accounts</a>
+            <a href="{% url 'admin:index' %}" class="btn btn-link" target="_blank">Admin Site</a>
         </h5>
-
     </footer>
 </div>
+{% elif user.username == 'student' %}
+<div align="center">
+    <footer>
+        <h5>
+            <a href="{% url 'index' %}" class="btn btn-link">All Accounts</a>
+            <a href="{% url 'userindex' %}" class="btn btn-link">My Accounts</a>
+            <a href="{% url 'admin:index' %}" class="btn btn-link" target="_blank">Admin Site</a>
+        </h5>
+    </footer>
+</div>
+{% else %}
+<h5> || A NightxGamer Website || </h5>
+{% endif %}
+{% endif %}
 {% endblock %}
