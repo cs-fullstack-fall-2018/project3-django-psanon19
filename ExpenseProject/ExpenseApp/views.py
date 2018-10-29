@@ -59,15 +59,18 @@ def deposit(request, pk):
 
         deposit_amt = float(request.POST['trans_value'])
         checking_acc = request.POST['trans_check']
+        trans_reason= request.POST['trans_reason']
 
         # UPDATE THE RUNNING BALANCE
 
         if checking_acc != 'SAVINGS':
             deposit_amt: float = deposit_amt
             the_model.current_balance += deposit_amt
+            the_model.reason = trans_reason
         if checking_acc == 'SAVINGS':
             deposit_amt: float = deposit_amt
             the_model.emergency_fund += deposit_amt
+            the_model.reason = trans_reason
         else:
             print("it worked")
 
@@ -75,7 +78,7 @@ def deposit(request, pk):
 
         # NOW UPDATE TRANSACTION HISTORY
 
-        setValue = TransactionModel(id=None, deposits=deposit_amt, withdraws=0, date_Submittd=datetime.now(), expenseFK=the_model)
+        setValue = TransactionModel(id=None, deposits=deposit_amt, withdraws=0, reason=trans_reason, date_Submittd=datetime.now(), expenseFK=the_model)
         setValue.save()
         return redirect('userindex')
     else:
@@ -90,15 +93,18 @@ def withdraw(request, pk):
 
         withdraw_amt = float(request.POST['trans_value'])
         checking_acc = request.POST['trans_check']
+        trans_reason= request.POST['trans_reason']
 
         # UPDATE THE RUNNING BALANCE
 
         if checking_acc != 'SAVINGS':
             withdraw_amt: float = withdraw_amt
             the_model.current_balance -= withdraw_amt
+            the_model.reason = trans_reason
         if checking_acc == 'SAVINGS':
             withdraw_amt: float = withdraw_amt
             the_model.emergency_fund -= withdraw_amt
+            the_model.reason = trans_reason
         else:
             print("it worked")
 
@@ -106,10 +112,11 @@ def withdraw(request, pk):
 
         # NOW UPDATE TRANSACTION HISTORY
 
-        setValue = TransactionModel(id=None, deposits=0, withdraws=withdraw_amt, date_Submittd=datetime.now(), expenseFK=the_model)
+        setValue = TransactionModel(id=None, deposits=0, withdraws=withdraw_amt, reason=trans_reason, date_Submittd=datetime.now(), expenseFK=the_model)
         setValue.save()
         return redirect('userindex')
     else:
+        the_model = get_object_or_404(ExpenseModel, pk=pk)
         print('THE WARP cookie')
     return render(request, 'ExpenseApp/withdraw.html')
 

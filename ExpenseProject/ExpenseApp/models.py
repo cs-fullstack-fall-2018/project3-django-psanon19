@@ -35,6 +35,7 @@ class UserSetup(models.Model):
 class TransactionModel(models.Model):
     deposits = models.FloatField(default=0, null=True, blank=True,)
     withdraws = models.FloatField(default=0, null=True, blank=True,)
+    reason = models.CharField(max_length=50, null=True, blank=True)
     date_Submittd = models.DateTimeField(default=datetime.now)
     expenseFK = models.ForeignKey(ExpenseModel, on_delete=models.SET_NULL, null=True, blank=True,)
 

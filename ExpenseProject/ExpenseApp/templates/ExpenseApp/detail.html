@@ -33,7 +33,7 @@
 
     {% for eachTransactions in transactions %}
         {% if eachTransactions.deposits != 0 %}
-        <p>$ {{ eachTransactions.deposits|floatformat:2 }} on the {{eachTransactions.date_Submittd}} from the BLANK account</p>
+        <p>$ {{ eachTransactions.deposits|floatformat:2 }} on the {{eachTransactions.date_Submittd}} from {{eachTransactions.reason}}</p>
         <hr/>
         {% endif %}
     {% endfor %}
@@ -44,7 +44,7 @@
 
     {% for eachTransactions in transactions %}
         {% if eachTransactions.withdraws != 0 %}
-        <p>$ {{ eachTransactions.withdraws|floatformat:2 }} on the {{eachTransactions.date_Submittd}} from the BLANK account</p>
+        <p>$ {{ eachTransactions.withdraws|floatformat:2 }} on the {{eachTransactions.date_Submittd}} for {{eachTransactions.reason}}</p>
         <hr/>
         {% endif %}
     {% endfor %}
