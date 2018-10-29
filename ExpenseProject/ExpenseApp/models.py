@@ -9,7 +9,7 @@ class ExpenseModel(models.Model):
     last_name = models.CharField(max_length=50, null=True)
     date_Submitted = models.DateTimeField(default=datetime.now)
     current_balance = models.FloatField(default=0,)
-    emergency_fund = models.DecimalField(default=0,max_digits=25, decimal_places=2)
+    emergency_fund = models.FloatField(default=0,)
     username = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,)
 
     #
@@ -26,6 +26,7 @@ class UserSetup(models.Model):
     last_name = models.CharField(max_length=50, null=True)
     password = models.CharField(max_length=257)
     email = models.EmailField(max_length=200)
+    nameFK = models.ForeignKey(ExpenseModel, on_delete=models.SET_NULL, null=True, blank=True,)
 
     def __str__(self):
         return self.first_name

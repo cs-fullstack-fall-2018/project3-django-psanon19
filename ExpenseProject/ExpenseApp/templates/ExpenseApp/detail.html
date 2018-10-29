@@ -7,6 +7,8 @@
         {{ post.date_Submitted }}
     </div>
     {% endif %}
+
+    <!--{# if post.username == user.get_username #}-->
     <div align="center"><b>
     <a class="btn btn-primary btn-lg btn-block" href="{% url 'edit' pk=post.pk %}">Edit Info</a>
         <br/>
@@ -31,7 +33,7 @@
 
     {% for eachTransactions in transactions %}
         {% if eachTransactions.deposits != 0 %}
-        <p>$ {{ eachTransactions.deposits|floatformat:2 }} on the {{eachTransactions.date_Submittd}}</p>
+        <p>$ {{ eachTransactions.deposits|floatformat:2 }} on the {{eachTransactions.date_Submittd}} from the BLANK account</p>
         <hr/>
         {% endif %}
     {% endfor %}
@@ -42,14 +44,16 @@
 
     {% for eachTransactions in transactions %}
         {% if eachTransactions.withdraws != 0 %}
-        <p>$ {{ eachTransactions.withdraws|floatformat:2 }} on the {{eachTransactions.date_Submittd}}</p>
+        <p>$ {{ eachTransactions.withdraws|floatformat:2 }} on the {{eachTransactions.date_Submittd}} from the BLANK account</p>
         <hr/>
         {% endif %}
     {% endfor %}
     </div>
     </div>
 </div>
-
+<!--{# else #}-->
+<!--<div>You are in the wrong place</div>-->
+<!--{# endif #}-->
 {% endblock %}
 
 

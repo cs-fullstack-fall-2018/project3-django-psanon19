@@ -27,7 +27,7 @@ def createUser(request):
             User.objects.create_user(request.POST.get("first_name"), request.POST.get("email"),
                                      request.POST.get("password"), )
             form.save()
-            return redirect('index')
+            return redirect('userindex')
     else:
         form = UserForm()
         return render(request, 'ExpenseApp/createUser.html', {'form': form})
@@ -54,22 +54,29 @@ def edit(request, pk):
 @login_required
 def deposit(request, pk):
     the_model = get_object_or_404(ExpenseModel, pk=pk)
-    print("first cookie")
+
     if request.method == "POST":
-        print("second cookie")
-        print(request.POST['trans_value'])
+
         deposit_amt = float(request.POST['trans_value'])
+        checking_acc = request.POST['trans_check']
 
         # UPDATE THE RUNNING BALANCE
-        deposit_amt: float = deposit_amt
-        the_model.current_balance += deposit_amt
+
+        if checking_acc != 'SAVINGS':
+            deposit_amt: float = deposit_amt
+            the_model.current_balance += deposit_amt
+        if checking_acc == 'SAVINGS':
+            deposit_amt: float = deposit_amt
+            the_model.emergency_fund += deposit_amt
+        else:
+            print("it worked")
 
         the_model.save()
-        print("ALL FOR COOKIE")
+
         # NOW UPDATE TRANSACTION HISTORY
-        print(the_model)
-        thist = TransactionModel(id=None, deposits=deposit_amt, withdraws=0, date_Submittd=datetime.now(), expenseFK=the_model)
-        thist.save()
+
+        setValue = TransactionModel(id=None, deposits=deposit_amt, withdraws=0, date_Submittd=datetime.now(), expenseFK=the_model)
+        setValue.save()
         return redirect('userindex')
     else:
         print('THE WARP cookie')
@@ -78,22 +85,29 @@ def deposit(request, pk):
 @login_required
 def withdraw(request, pk):
     the_model = get_object_or_404(ExpenseModel, pk=pk)
-    print("first cookie")
+
     if request.method == "POST":
-        print("second cookie")
-        print(request.POST['trans_value'])
+
         withdraw_amt = float(request.POST['trans_value'])
+        checking_acc = request.POST['trans_check']
 
         # UPDATE THE RUNNING BALANCE
-        withdraw_amt: float = withdraw_amt
-        the_model.current_balance -= withdraw_amt
+
+        if checking_acc != 'SAVINGS':
+            withdraw_amt: float = withdraw_amt
+            the_model.current_balance -= withdraw_amt
+        if checking_acc == 'SAVINGS':
+            withdraw_amt: float = withdraw_amt
+            the_model.emergency_fund -= withdraw_amt
+        else:
+            print("it worked")
 
         the_model.save()
-        print("ALL FOR COOKIE")
+
         # NOW UPDATE TRANSACTION HISTORY
-        print(the_model)
-        thist = TransactionModel(id=None, deposits=0, withdraws=withdraw_amt, date_Submittd=datetime.now(), expenseFK=the_model)
-        thist.save()
+
+        setValue = TransactionModel(id=None, deposits=0, withdraws=withdraw_amt, date_Submittd=datetime.now(), expenseFK=the_model)
+        setValue.save()
         return redirect('userindex')
     else:
         print('THE WARP cookie')
@@ -114,10 +128,12 @@ def edit_Account(request, pk):
 
 def post_new(request):
     if request.method == 'POST':
-        form = UserForm(request.POST)
+        form = ExpenseForm(request.POST)
         if form.is_valid():
-            form.save()
+            newpost = form.save(commit=False)
+            newpost.username = request.user
+            newpost.save()
             return redirect('userindex')
     else:
         form = ExpenseForm()
-    return render(request,'ExpenseApp/input.html', {'form': form})
+    return render(request,'ExpenseApp/new.html', {'form': form})

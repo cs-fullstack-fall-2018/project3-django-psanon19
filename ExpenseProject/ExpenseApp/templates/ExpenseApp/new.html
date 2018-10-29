@@ -2,14 +2,9 @@
 
 {% block maininfo%}
 
-<p><img src="../../static/ExpenseApp/images/EditAccName.png" height="31" width="300"/></p>
 <form method="POST">
     {% csrf_token %}
-    <p>{{ form.first_name }}</p>
-    <p>{{ form.last_name }}</p>
-    {{ form.current_balance.as_hidden }}
-    {{ form.emergency_fund.as_hidden }}
-
+    {{ form.as_p }}
     <button type="submit">Submit</button>
 </form>
 
@@ -47,9 +42,9 @@
 
 {% block navi %}
 
-    <li class="logout" align="right">
-        <a href="{% url 'logout' %}" class="btn btn-link">Logout</a>
-    </li>
+<li class="logout" align="right">
+    <a href="{% url 'logout' %}" class="btn btn-link">Logout</a>
+</li>
 
 {% endblock %}
 

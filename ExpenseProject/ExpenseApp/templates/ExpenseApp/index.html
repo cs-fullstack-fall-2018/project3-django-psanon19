@@ -21,7 +21,9 @@
         </div>
             <ul>
                 {% for eachItem in form_list %}
-                    <li><a href="{% url 'detail' pk=eachItem.pk %}" class="btn btn-link">{{ eachItem.first_name }}</a>| <p>Current Balance: $ {{ eachItem.current_balance|floatformat:2 }}</p></li>
+                    <li><a href="{% url 'detail' pk=eachItem.pk %}" class="btn btn-link">{{ eachItem.first_name }}</a>
+                        <p><b>Checking Balance</b>: $ {{ eachItem.current_balance|floatformat:2 }} ||
+                        <b>Saving Balance</b>: $ {{ eachItem.emergency_fund|floatformat:2 }}</p></li>
                     <br/>
 
                     </hr>
@@ -50,7 +52,12 @@
                 {% endfor %}
             </ul>
             {% else %}
-            <h1 align="center">Hey buddy, you should Log In!</h1>
+        <div align="center">
+            <img src="../../static/ExpenseApp/images/familyAcc.png" height="31" width="320">
+            <a href="{% url 'post_new' %}"><img align="right" src="../../static/ExpenseApp/images/plus.png" height="33" width="33" title="Add New Family Account"/></a>
+            <hr/>
+        </div>
+            <h1 align="center">Add an Account</h1>
     {% endif %}
 {% endblock %}
 

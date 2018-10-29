@@ -12,9 +12,18 @@
 {% block maininfo %}
 
 
+<img src="../../static/ExpenseApp/images/deposit.png" height="71" width="214"/>
+<hr/>
 <form method="POST">
 
     {% csrf_token %}
+
+    <label for="trans_check_id">Checking</label>
+    <input type="radio" name="trans_check" value="CHECKING" id="trans_check_id" checked>
+    <label for="trans_save_id">Savings</label>
+    <input type="radio" name="trans_check" value="SAVINGS"  id="trans_save_id">
+
+    <br/>
     <label for="trans_value_id">How Much to Deposit?</label>
     <input type="number" name="trans_value" id = "trans_value_id" step="0.01"/>
     <button type="submit">Save</button>
