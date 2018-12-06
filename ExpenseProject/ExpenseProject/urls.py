@@ -18,6 +18,5 @@ from django.urls import include, path
 
 urlpatterns = [
     path('', include('ExpenseApp.urls')),
-
     path('accounts/', include('django.contrib.auth.urls')),
 ]
